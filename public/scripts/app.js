@@ -7,31 +7,31 @@
 
 
 /* hard-coded data! */
-var sampleAlbums = [];
-sampleAlbums.push({
-             artistName: 'Ladyhawke',
-             name: 'Ladyhawke',
-             releaseDate: '2008, November 18',
-             genres: [ 'new wave', 'indie rock', 'synth pop' ]
-           });
-sampleAlbums.push({
-             artistName: 'The Knife',
-             name: 'Silent Shout',
-             releaseDate: '2006, February 17',
-             genres: [ 'synth pop', 'electronica', 'experimental' ]
-           });
-sampleAlbums.push({
-             artistName: 'Juno Reactor',
-             name: 'Shango',
-             releaseDate: '2000, October 9',
-             genres: [ 'electronic', 'goa trance', 'tribal house' ]
-           });
-sampleAlbums.push({
-             artistName: 'Philip Wesley',
-             name: 'Dark Night of the Soul',
-             releaseDate: '2008, September 12',
-             genres: [ 'piano' ]
-           });
+// var sampleAlbums = [];
+// sampleAlbums.push({
+//              artistName: 'Ladyhawke',
+//              name: 'Ladyhawke',
+//              releaseDate: '2008, November 18',
+//              genres: [ 'new wave', 'indie rock', 'synth pop' ]
+//            });
+// sampleAlbums.push({
+//              artistName: 'The Knife',
+//              name: 'Silent Shout',
+//              releaseDate: '2006, February 17',
+//              genres: [ 'synth pop', 'electronica', 'experimental' ]
+//            });
+// sampleAlbums.push({
+//              artistName: 'Juno Reactor',
+//              name: 'Shango',
+//              releaseDate: '2000, October 9',
+//              genres: [ 'electronic', 'goa trance', 'tribal house' ]
+//            });
+// sampleAlbums.push({
+//              artistName: 'Philip Wesley',
+//              name: 'Dark Night of the Soul',
+//              releaseDate: '2008, September 12',
+//              genres: [ 'piano' ]
+//            });
 /* end of hard-coded data */
 
 
@@ -39,14 +39,35 @@ sampleAlbums.push({
 
 
 $(document).ready(function() {
+console.log("Sanity check! app.js running");
+$.ajax({
+   method: 'GET',
+   url: '/api/albums',
+   success: onSuccess,
+   error: onError
+ });
 
-  function renderAlbum(albums){
-    var source = $('#album-template').html();
-    var template = Handlebars.compile(source);
-    var newHtml = template(albums);
-    $('#albums').append(newHtml);
 
+function renderAlbums(albums){
+  var source = $('#album-template').html();
+  var template = Handlebars.compile(source);
+  var newHtml = template(albums);
+  $('#albums').append(newHtml);
+}
+
+
+function onSuccess(album) {
+  //allAlbums = json;
+  album.forEach(function(element){
+    renderAlbums(element);
+  });
+}
+function onError() {
+  console.log('error');
 
 }
-sampleAlbums.forEach(renderAlbum);
+
+
 });
+
+// sampleAlbums.forEach(renderAlbum);

@@ -36,8 +36,12 @@ albums.push({
 
 // GET /api/albums
 function index(req, res) {
-
+  //db.Album.find({}, function(err, albums){
+  //   if (err){ return console.log("index error:", err);}
+  res.json(albums);
+  // });
 }
+
 
 function create(req, res) {
   // FILL ME IN !
