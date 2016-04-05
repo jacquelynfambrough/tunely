@@ -15,6 +15,15 @@
 $(document).ready(function() {
 console.log("Sanity check! app.js running");
 
+
+$('form').on("submit", function showData(event){
+  console.log($(this).serialize());
+  $('input[type=text]').val("");
+  event.preventDefault();
+
+
+});
+
 $.ajax({
    method: 'GET',
    url: '/api/albums',
@@ -26,7 +35,7 @@ $.ajax({
 
 
 function handleReceiveAllAlbums(json) {
-  
+
   json.forEach(function (albums){
     renderAlbums(albums);
   });
