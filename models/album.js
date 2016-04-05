@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var Album Schema = new Schema {
+var AlbumSchema = new Schema ({
 
   name: String,
   artistName: String,
@@ -9,7 +9,7 @@ var Album Schema = new Schema {
   genres: [String]
 
 
-}
+});
 
 
 var Album = mongoose.model('Album', AlbumSchema);
